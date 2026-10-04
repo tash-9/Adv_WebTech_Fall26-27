@@ -7,28 +7,36 @@ function getStudentResult(){
 
             if (success){
                 const student = {
-                    ID: 101,
+                    id: 101,
                     name: "Rahim",
                     dept: "CSE",
                     marks: 85
                 }
                 resolve(student);
-
             } else {
                 reject("Failed")
             }
-        }
-        , 3000);
+        }, 3000);
     });
 }
 
-getStudentResult().then((student) => {
-    console.log("Gwtting student result...")
-    console.log(student)
-})
-
-.catch((error) => {
-    console.log("Error")
-})
+async function diplayResult(){
+    console.log("Getting student result...");
+    try{
+        const student = await getStudentResult();
+        console.log("Getting student result...")
+        console.log("ID: " + student.id);
+        console.log("Name: " + student.name);
+        console.log("Department: " + student.dept);
+        console.log("Marks: " + student.marks);
+        console.log(student)
+    } 
+    catch(error) {
+        console.log("Error: " +error);
+    } 
+    finally {
+    console.log("Result processing complete")
+    }
+}
 
 diplayResult();
